@@ -16,7 +16,6 @@ const proFrame = getDiv("processframe");
 const state = getP("state");
 const logo = getP("logo");
 const logoImg = getImg("logo");
-
 const fileList = [
     "../Frameworks/font.framework/PingFangSC-Regular.woff2",
     "../Frameworks/font.framework/sf-pro-display_regular.woff2",
@@ -74,7 +73,7 @@ async function boot() {
     let platform = getQueryParam('platform');
     let freeze = false;
     if (!platform) {
-        platform = 'MacPro7,1';
+        platform = 'Macmini8,1';
     }
 
     fetchJSON('./PlatformSupport.json', 'platform', platform)
@@ -82,7 +81,10 @@ async function boot() {
             if (result) {
                 console.log("Loaded SMBIOS: " + platform);
             } else {
-                notSupported();
+                proFrame.style.background = "var(--boot-bg)";
+                setTimeout(function () {
+                    notSupported();
+                }, 500);
                 freeze = true;
             }
         });
@@ -113,7 +115,7 @@ function toLogond(anyFileExists, fileExistsNum) {
         if (process.style.width == "100%") {
             setTimeout(function () {
                 window.location = "./logond.html";
-            }, 1500);   
+            }, 1750);   
         }
     }
 }
@@ -126,7 +128,6 @@ function notSupported() {
     frame.style.width = "auto";
     frame.style.height = "auto";
     process.style.display = "none";
-    proFrame.style.background = "var(--boot-bg)";
     logo.style.display = "none";
     logoImg.style.display = "block";
     state.style.display = "block";

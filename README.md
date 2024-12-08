@@ -5,7 +5,7 @@
 <p align="center"><img alt="logo" src="./logo.png" title="Logo" width="150" height="150" /></p>
 
 <p align="center">
-<code>Webintosh</code> 是一个基于 <code>html5</code> 的仿 macOS 项目。
+<code>Webintosh</code> 是一个基于 <code>html5</code> 的仿 macOS Sequoia 项目。
 <br/>
 <strong>您现在浏览的是测试版本！<a href="github.com/codecrafter-tl/webintosh">点击此处</a>跳转至稳定版本！</strong>
 </p>
@@ -41,5 +41,5 @@
 
 ### ✅ 版本
 
-* 🔖 最新版本 : `8.0.0.dev3`
-* 🕓 发布日期 : 2024-12-07
+* 🔖 最新版本 : `8.0.0.dev4`
+* 🕓 发布日期 : 2024-12-08

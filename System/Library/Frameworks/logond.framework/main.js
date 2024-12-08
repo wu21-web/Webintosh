@@ -116,7 +116,7 @@ async function toDesktop() {
     }
 
     await sleep(timeout);
-    window.location = './dtkernel.html';
+    window.location = './windowserver.html';
 }
 
 async function invalidPassword(value = "Ventura Sonoma Sequoia 选一个吧") {
