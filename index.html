@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!--This index.html is a rewritted version which contains some brief info of the project.-->
 <!--This page will derect you to the boot up page.-->
 
@@ -103,3 +104,144 @@
         </div>
     </body>
 </html>
+=======
+<!--This index.html is a rewritted version which contains some brief info of the project.-->
+<!--This page will derect you to the boot up page.-->
+
+<!-- Your karma check for today:
+There once was a user that whined
+his existing OS was so blind,
+he'd do better to pirate an OS that ran great
+but found his hardware declined.
+Please don't steal Mac OS!
+Really, that's way uncool.
+(C) Apple Computer, Inc. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>macOS</title>
+    <!--<link rel="stylesheet" href="/System/Library/Frameworks/boot.framework/main.css" />-->
+    <title>Welcome to Webintosh</title>
+        <link rel="icon" href="./images/AppleInternalIcon 2.png" />
+        <style>
+        body {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            flex-direction: column;
+            margin: 0;
+            background-image: url(./System/Library/CoreServices/DefAultBackground.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+        }
+
+        @keyframes BackBtnFloatingAnimation {
+            0% {
+                transform: scale(0.97);
+                background-color: rgba(0, 0, 0, 0.6);
+                letter-spacing: 7px;
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes BtnFloatingAnimation {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(0.97);
+                background-color: rgba(0, 0, 0, 0.6);
+                letter-spacing: 7px;
+            }
+        }
+
+        .info-card {
+            /*display: flex;*/
+            backdrop-filter: blur(48px);
+            -webkit-backdrop-filter: blur(48px);
+            min-width: 50px;
+            min-height: 50px;
+            width: 65%;
+            height: 80%;
+            max-width: 1000px;
+            background-color: rgba(255,255,255,0.4);
+            border-radius: 24px;
+            position: absolute;
+            top: 10%;
+            align-self: center;
+            align-items: center;
+            text-align: center;
+            padding:16px 28px 16px 28px;
+        }
+
+        h1 {
+            color: rgba(0,0,0,0.65);
+            text-align: center;
+            width: 100%;
+        }
+
+        .start-button {
+            background-color: rgba(0,0,0,0.3);
+            color: #fff;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            width: auto;
+            /*left: calc((100% - 35%) / 2 - 20px);*/
+            position: relative;
+            top: 20px;
+            text-align: center;   
+            letter-spacing: 4px;
+            display: inline-block;
+            align-self: center;
+            padding:16px 36px 16px 36px;
+        }
+
+        .start-button:hover {
+            animation: BtnFloatingAnimation 0.3s forwards ease-in-out;
+        }
+
+        .start-button:not(:hover) {
+            animation: BackBtnFloatingAnimation 0.3s forwards ease-in-out;
+        }
+        </style>
+</head>
+
+<body>
+    <p logo></p>
+    <div frame style="visibility: hidden;">
+        <div processframe style="visibility: hidden;">
+            <div process style="visibility: hidden;"></div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <h1>Welcome to Webintosh</h1>
+        <p>This page is under construction!</p>
+        <p width="85%">This set of webpages provide you a realistic experience of MacOS in your web browser. 
+            All you have to do is to remember the log in password is one of the following: Ventura, Sonoma or Sequoia.
+            Then hit the button below and enjoy your smooth Mac experience right in your browser!
+        </p>
+        <p>Made with ❤ by CodeCrafter-TL</p>
+        <div class="start-button" onclick="window.location = './System/Library/CoreServices/boot.html'">Get Started →</div>
+    </div>
+
+    <!--<script>
+        setTimeout(function () {
+            window.location = './System/Library/CoreServices/boot.html';
+        }, 1000);
+    </script>-->
+</body>
+
+</html>
+>>>>>>> origin/master
