@@ -7,7 +7,7 @@
 <p align="center">
 <code>Webintosh</code> 是一个基于 <code>html5</code> 的仿 macOS Sequoia 项目。
 <br/>
-<strong>您现在浏览的是测试版本！<a href="github.com/codecrafter-tl/webintosh/tree/old">点击此处</a>跳转至稳定版本！</strong>
+<strong>您现在浏览的是测试版本！<a href="https://github.com/codecrafter-tl/webintosh/tree/old">点击此处</a>跳转至稳定版本！</strong>
 </p>
 
 <p align="center">
