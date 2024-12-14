@@ -31,11 +31,14 @@ fetch('../../../Frameworks/dock.framework/dockitem.json')
             let icon = document.createElement('img');
             icon.src = dockitem.path + "./../../Resources/AppIcon.png";
             icon.alt = dockitem.name;
-            icons.push(icon);
+            icon.path = dockitem.path;
+            icons.push([icon, dockitem.path]);
             dock.appendChild(icon);
         });
 
-        icons.forEach(icon => {
+        icons.forEach(iconlist => {
+            const icon = iconlist[0];
+            const path = iconlist[1];
             icon.addEventListener('click', () => {
                 alert("您打开了应用程序: " + icon.alt);
             });

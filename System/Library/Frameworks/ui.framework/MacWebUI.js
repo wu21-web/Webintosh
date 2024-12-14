@@ -576,7 +576,42 @@ container-messagebox {
     }
 }
 
+// Window: Iframe
+class WindowIframe extends HTMLElement {
+    constructor() {
+        super();
+        this.iframe = document.createElement('iframe');
+        this.iframe.style.border = 'none';
+        this.iframe.style.overflow = 'hidden';
+
+        this.attachShadow({ mode: 'open' }).appendChild(this.iframe);
+    }
+
+    connectedCallback() {
+        this.iframe.onload = () => this.reSize();
+        this.iframe.src = this.getAttribute('src');
+    }
+
+    reSize() {
+        if (this.iframe.contentWindow.document.body) {
+            this.iframe.style.width = this.iframe.contentWindow.document.body.scrollWidth + 'px';
+            this.iframe.style.height = this.iframe.contentWindow.document.body.scrollHeight + 'px';
+        }
+    }
+
+    static get observedAttributes() {
+        return ['src'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'src' && oldValue !== newValue) {
+            this.iframe.src = newValue;
+        }
+    }
+}
+
 // Custom Elements Definion
+customElements.define('window-iframe', WindowIframe);
 customElements.define('widget-switch', WidgetSwitch);
 customElements.define('widget-menu', WidgetMenu);
 customElements.define('container-messagebox', ContainerMessageBox);
