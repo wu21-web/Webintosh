@@ -51,6 +51,7 @@ widget-button {
 }`;
         let p_style = `margin: 0; padding: 0; height: 50%;`;
         const p = document.createElement('p');
+        const cmd = this.getAttribute('command');
         p.innerHTML = this.innerHTML;
         p.setAttribute('style', p_style);
 
@@ -59,6 +60,7 @@ widget-button {
 
         function start_click() {
             this.style.filter = 'brightness(90%)';
+            eval(cmd);
         }
         function end_click() {
             this.style.filter = 'none';
