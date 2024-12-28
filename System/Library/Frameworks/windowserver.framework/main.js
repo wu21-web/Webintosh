@@ -11,14 +11,11 @@ function updateTime() {
     const minutes = currentDateTime.getMinutes().toString().padStart(2, '0');
     let day = currentDateTime.getDate();
     let month = currentDateTime.getMonth() + 1;
-
     const days = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
     let weekDay = days[currentDateTime.getDay()];
-
     day = day.toString();
     month = month.toString();
-
-    datetime.innerHTML = month + '月' + day + '日' + ' ' + weekDay + ' ' + hours + ':' + minutes;
+    datetime.innerHTML = `${month}月${day}日 ${weekDay} ${hours}:${minutes}`;
 }
 
 function getMaxZIndex() {
