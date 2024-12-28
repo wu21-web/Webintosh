@@ -4,6 +4,7 @@
     cursor: default;
     user-select: none;
     -webkit-user-select: none;
+    letter-spacing: 0.5px;
 }
 
 body {

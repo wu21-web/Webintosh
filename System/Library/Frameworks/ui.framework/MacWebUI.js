@@ -75,9 +75,11 @@ widget-button {
 
 // Widget: Menu
 class WidgetMenu extends HTMLElement {
-    constructor() {
+    constructor(menu_logo, state) {
         super();
 
+        this.logo = menu_logo;
+        this.state = state;
         const shadow = this.attachShadow({ mode: 'open' });
 
         const style = document.createElement('style');
@@ -103,7 +105,7 @@ widget-menu {
     justify-content: center;
     align-items: start;
     font-family: 'SFPro-Regular', 'PingFang-Regular';
-    padding: 3.5px 5px;
+    padding: 5.5px 7.5px;
     z-index: 1024;
     transition: opacity 0.25s ease-out;
 }
@@ -113,19 +115,19 @@ widget-menu {
     color: #000;
     width: calc(100% - 10px);
     height: auto;
-    padding: 1.5px 5px;
+    padding: 2px 5px;
     border-radius: 5px;
     font-size: 13px;
     background-color: transparent;
 }
 
 #hr {
-    margin-top: 1.5px;
-    margin-bottom: 1.5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
     border: none;
     width: calc(100% - 10px);
     height: 1px;
-    background-color: #fafafa80;
+    background-color: #fafafa60;
 }
 
 #content:hover {
@@ -172,6 +174,8 @@ widget-menu {
                         now_p.style.color = '#fff';
                         setTimeout(() => {
                             this.style.display = 'none';
+                            this.logo.style.background = '#fafafa00';
+                            this.state = false;
                             if (commands[index]) {
                                 eval(commands[index]);
                             }

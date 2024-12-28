@@ -43,7 +43,7 @@ function appleMenu() {
         menu_logo.style.background = '#fafafa60';
         menu_logo.style.textShadow = 'none';
         appleMenu_state = true;
-        applemenu = new WidgetMenu();
+        applemenu = new WidgetMenu(menu_logo, appleMenu_state);
         applemenu.setAttribute("x", "10");
         applemenu.setAttribute("y", "26");
         applemenu.setAttribute("width", "175");
@@ -60,7 +60,7 @@ function appleMenu() {
             }
         })
     } else {
-        menu_logo.style.background = 'none';
+        menu_logo.style.background = '#fafafa00';
         menu_logo.style.textShadow = '0 2px 10px #000a;';
         appleMenu_state = false;
         applemenu.style.opacity = 0;
