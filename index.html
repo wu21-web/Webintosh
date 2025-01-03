@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Webintosh</title>
-    <link rel="stylesheet" href="./System/Library/Frameworks/ui.framework/font.css" />
-    <link rel="stylesheet" href="./System/Library/Frameworks/setupassistant.framework/main.css" />
+    <link rel="stylesheet" href="StyleSheet/font.css" />
+    <link rel="stylesheet" href="StyleSheet/oobe.css" />
 </head>
 
 <body>
     <div main>
-        <img src="./System/Library/CoreServices/Setup Assistant.app/Resources/Sequoia.png" />
+        <img src="Image/Sequoia.png" />
         <p title>Welcome to Webintosh</p>
         <p subtitle>This page is under construction!</p>
         <p description>
-            This set of webpages provide you a realistic experience of macOS Sequoia in your web browser.<br />
+            This set of webpages provide you a realistic experience of <a link href="https://apple.com/macos">macOS Sequoia</a> in your web browser.<br />
             All you have to do is to remember the log in password is one of the following: Ventura, Sonoma or
             Sequoia.<br />
             Then hit the button below and enjoy your smooth Mac experience right in your browser!<br />
@@ -26,11 +26,11 @@
     <script>
         function getStarted() {
             setTimeout(function () {
-                window.location = './System/Library/CoreServices/boot.html';
+                window.location = 'Boot/index.html';
             }, 750);
         }
     </script>
-    <script src="./System/Library/Frameworks/ui.framework/MacWebUI.js"></script>
+    <script src="JavaScript/ui.js"></script>
 </body>
 
 </html>
