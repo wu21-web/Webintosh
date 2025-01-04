@@ -23,10 +23,17 @@ let ctrlRPressed = false;
 
 window.addEventListener('keydown', function (event) {
     if (event.altKey) {
+        event.preventDefault();
         altPressed = true;
     }
     if (event.ctrlKey && event.key.toLowerCase() === 'r') {
+        event.preventDefault();
         ctrlRPressed = true;
+    }
+    if (altPressed) {
+        setTimeout(function () {toManager()}, 250);
+    } else if (ctrlRPressed) {
+        setTimeout(function () {toRecovery()}, 250);
     }
 });
 
@@ -39,17 +46,8 @@ window.addEventListener('keyup', function (event) {
         ctrlRPressed = false;
         event.preventDefault();
     }
+    console.log(altPressed, ctrlRPressed);
 });
-
-function checkKeys() {
-    if (altPressed) {
-        return "alt";
-    } else if (ctrlRPressed) {
-        return "ctrlR";
-    } else {
-        return null;
-    }
-}
 
 function fetchJSON(url, arrayName, element) {
     return fetch(url)
@@ -104,9 +102,7 @@ async function boot() {
                 console.log("Loaded SMBIOS: " + platform);
             } else {
                 proFrame.style.background = "var(--boot-bg)";
-                setTimeout(function () {
-                    notSupported();
-                }, 500);
+                notSupported();
                 freeze = true;
             }
         });
@@ -128,19 +124,11 @@ async function boot() {
 
 
     if (!freeze) {
-        setTimeout(function () {
-            const key = checkKeys();
-            if (key == "alt") {
-                toManager();
-            } else if (key == "ctrlR") {
-                toRecovery();
-            }
-        }, 1700);
-        toLogond(anyFileExists, fileExistsNum);
+        toLogon(anyFileExists, fileExistsNum);
     }
 }
 
-function toLogond(anyFileExists, fileExistsNum) {
+function toLogon(anyFileExists, fileExistsNum) {
     if (anyFileExists && fileExistsNum > 0) {
         process.style.width = (process.clientWidth + 10 * fileExistsNum) + "%";
         if (process.style.width == "100%") {
