@@ -18,6 +18,38 @@ const fileList = [
     "../Image/Wallpaper.png",
     "../Logon/index.html"
 ];
+let altPressed = false;
+let ctrlRPressed = false;
+
+window.addEventListener('keydown', function (event) {
+    if (event.altKey) {
+        altPressed = true;
+    }
+    if (event.ctrlKey && event.key.toLowerCase() === 'r') {
+        ctrlRPressed = true;
+    }
+});
+
+window.addEventListener('keyup', function (event) {
+    if (event.altKey) {
+        event.preventDefault();
+        altPressed = false;
+    }
+    if (event.ctrlKey && event.key.toLowerCase() === 'r') {
+        ctrlRPressed = false;
+        event.preventDefault();
+    }
+});
+
+function checkKeys() {
+    if (altPressed) {
+        return "alt";
+    } else if (ctrlRPressed) {
+        return "ctrlR";
+    } else {
+        return null;
+    }
+}
 
 function fetchJSON(url, arrayName, element) {
     return fetch(url)
@@ -94,7 +126,16 @@ async function boot() {
         }
     }
 
+
     if (!freeze) {
+        setTimeout(function () {
+            const key = checkKeys();
+            if (key == "alt") {
+                toManager();
+            } else if (key == "ctrlR") {
+                toRecovery();
+            }
+        }, 1700);
         toLogond(anyFileExists, fileExistsNum);
     }
 }
@@ -105,9 +146,17 @@ function toLogond(anyFileExists, fileExistsNum) {
         if (process.style.width == "100%") {
             setTimeout(function () {
                 window.location = "../Logon";
-            }, 1750);   
+            }, 1750);
         }
     }
+}
+
+function toManager() {
+    window.location = "./manager.html";
+}
+
+function toRecovery() {
+    window.location = "../Recovery";
 }
 
 window.onload = boot;

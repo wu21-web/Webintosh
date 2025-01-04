@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detect Alt + Windows+R Shortcut</title>
+</head>
+<body>
+    <h1>Press the Alt key or Windows+R key combination!</h1>
+    <button onclick="checkKeys()">Check if keys are pressed</button>
+    <p id="status"></p>
+
+    <script>
+        // 用来记录是否按下了 Alt 键或者 Windows+R 键
+        let altPressed = false;
+        let windowsRPressed = false;
+
+        // 注册全局事件监听器
+        window.addEventListener('keydown', function(event) {
+            if (event.altKey) {
+                altPressed = true;  // 记录 Alt 键按下
+            }
+            if (event.ctrlKey && event.key.toLowerCase() === 'r') {
+                windowsRPressed = true;  // 记录 Windows + R 按下
+            }
+        });
+
+        // 注册全局事件监听器，用于处理键盘释放事件
+        window.addEventListener('keyup', function(event) {
+            if (event.altKey) {
+                event.preventDefault();
+                altPressed = false;  // 释放 Alt 键时更新状态
+            }
+            if (event.ctrlKey && event.key.toLowerCase() === 'r') {
+                
+                windowsRPressed = false;  // 释放 Windows + R 键时更新状态
+                event.preventDefault();
+            }
+        });
+
+        // 函数：调用时检查快捷键状态
+        function checkKeys() {
+            // 根据状态判断是否按下了指定的快捷键
+            if (altPressed) {
+                document.getElementById('status').textContent = 'Alt key is pressed!';
+            } else if (windowsRPressed) {
+                document.getElementById('status').textContent = 'Windows + R is pressed!';
+            } else {
+                document.getElementById('status').textContent = 'Neither Alt key nor Windows + R is pressed!';
+            }
+        }
+
+        setTimeout(checkKeys, 1000);
+    </script>
+</body>
+</html>

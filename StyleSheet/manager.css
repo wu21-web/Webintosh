@@ -1,0 +1,62 @@
+body {
+    background: black;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'SFPro-Regular', 'PingFang-Regular';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes load {
+    0% {
+        transform: translateX(130px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+div[manager] {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    animation: load 0.5s ease-out forwards;
+    animation-delay: 0.25s;
+    transform: translateX(130px);
+    opacity: 0;
+}
+
+div[option] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+img[icon] {
+    width: 96px;
+    height: 96px;
+    background: #fafafa60;
+    border: solid 1px #0007;
+    border-radius: 10px;
+    padding: 10px;
+    padding-bottom: 7px;
+}
+
+img[selector] {
+    width: 30px;
+    height: 30px;
+}
+
+p[text] {
+    color: white;
+    font-size: 11px;
+    margin: 0;
+    margin-top: 3px;
+    margin-bottom: 5px;
+}
