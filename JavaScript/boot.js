@@ -1,14 +1,4 @@
-function getDiv(i) {
-    return document.querySelector(`div[${i}]`);
-}
-
-function getP(i) {
-    return document.querySelector(`p[${i}]`);
-}
-
-function getImg(i) {
-    return document.querySelector(`img[${i}]`);
-}
+import { getDiv, getP, getImg } from './element.js';
 
 const process = getDiv("process");
 const frame = getDiv("frame");

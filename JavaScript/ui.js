@@ -74,7 +74,7 @@ widget-button {
 }
 
 // Widget: Menu
-class WidgetMenu extends HTMLElement {
+export class WidgetMenu extends HTMLElement {
     constructor(menu_logo, state) {
         super();
 

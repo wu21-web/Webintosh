@@ -1,10 +1,4 @@
-function getDiv(i) {
-    return document.querySelector(`div[${i}]`);
-}
-
-function getP(i) {
-    return document.querySelector(`p[${i}]`);
-}
+import { getDiv } from './element.js';
 
 function create_window(x, y, file) {
     const iframe = window.parent.document.createElement('iframe');
@@ -63,6 +57,7 @@ fetch('../Json/dock.json')
             const path = iconlist[1];
             icon.addEventListener('click', () => {
                 create_window(60, 60, "../" + path);
+                // updateMenu(app_menus[icon.alt]);
             });
             icon.addEventListener('mouseover', () => {
                 const event = new MouseEvent('mouseover', {

@@ -1,22 +1,4 @@
-function getDiv(i) {
-    return document.querySelector(`div[${i}]`);
-}
-
-function getP(i) {
-    return document.querySelector(`p[${i}]`);
-}
-
-function getText(i) {
-    return document.querySelector(`text#${i}`);
-}
-
-function getImg(i) {
-    return document.querySelector(`img[${i}]`);
-}
-
-function getInput(i) {
-    return document.querySelector(`input[${i}]`);
-}
+import { getText, getP, getInput, getDiv } from './element.js';
 
 const overlay = getDiv('overlay');
 setTimeout(function () {

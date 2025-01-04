@@ -2,6 +2,32 @@
     font-family: 'SFPro-Regular', 'PingFang-Regular';
 }
 
+@media screen and (max-width: 1020px) {
+    div[dock] {
+        transform: translateY(0) scale(0.9);
+    }
+}
+@media screen and (max-width: 900px) {
+    div[dock] {
+        scale: 0.8;
+    }
+}
+@media screen and (max-width: 800px) {
+    div[dock] {
+        scale: 0.7;
+    }
+}
+@media screen and (max-width: 700px) {
+    div[dock] {
+        scale: 0.6;
+    }
+}
+@media screen and (max-width: 600px) {
+    div[dock] {
+        scale: 0.5;
+    }
+}
+
 body {
     height: auto;
     padding: 0;
@@ -62,7 +88,7 @@ div[dock] {
     justify-content: center;
     align-items: center;
     transform: translateY(120%);
-    transition: transform 0.6s ease-out;
+    transition: transform 0.6s ease-out, scale 0.2s ease, bottom 0.2s ease;
 }
 
 img {

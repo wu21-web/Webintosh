@@ -1,0 +1,13 @@
+* {
+    font-family: 'SFPro-Regular', 'PingFang-Regular';
+}
+
+body {
+    margin: 10px;
+    width: 940px;
+    height: 456px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
