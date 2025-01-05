@@ -146,6 +146,9 @@ async function boot() {
     if (!freeze) {
         if (nowait != "true") {
             setTimeout(() => {
+                if (altPressed) { // Don't execute continue if already pressed alt.
+                    return;
+                }
                 logo.style.visibility = "visible";
                 setTimeout(() => {
                     toLogon(anyFileExists, fileExistsNum);

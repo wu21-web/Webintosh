@@ -56,7 +56,6 @@ function getMaxZIndex() {
 }
 
 menu_logo.addEventListener('click', () => appleMenu(menu_logo));
-
 getMenu();
 // setupMenu(menus[0], "关于访达 hr 设置... hr 清倒废纸篓... hr 服务 hr 隐藏访达 隐藏其他 全部显示", "none none none none none none none", "45", "125")
 updateTime();

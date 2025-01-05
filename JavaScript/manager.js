@@ -1,6 +1,8 @@
-import { getDiv } from "./element.js";
+import { getDiv, getImg } from "./element.js";
 
 const option = getDiv("option");
+const disk = getImg("icon");
+const selector = getImg("selector");
 
 function toBoot() {
     option.style.display = "none";
@@ -14,3 +16,6 @@ window.addEventListener("keydown", (e) => {
         toBoot();
     }
 });
+
+disk.addEventListener("click", toBoot);
+selector.addEventListener("click", toBoot);

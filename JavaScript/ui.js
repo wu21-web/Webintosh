@@ -27,7 +27,6 @@ widget-button[primary] {
     padding: 0 5px;
     user-select: none;
     -webkit-user-select: none;
-    cursor: default;
 }
 widget-button {
     display: inline-flex;
@@ -47,7 +46,6 @@ widget-button {
     user-select: none;
     -webkit-user-select: none;
     box-shadow: 0 0 0 0 rgba(0,0,0,0.15), 0 1px 0 0 rgba(0,0,0,0.05);
-    cursor: default;
 }`;
         let p_style = `margin: 0; padding: 0; height: 50%;`;
         const p = document.createElement('p');
@@ -136,7 +134,6 @@ widget-menu {
     background-color: #0a82ffdd;
     border-radius: 5px;
     color: #fff;
-    cursor: default;
 }`
 
         document.head.appendChild(style);
@@ -316,7 +313,6 @@ container-window {
 }
 
 #red {
-    cursor: default;
     font-size: 7px;
     display: flex;
     justify-content: center;
@@ -329,7 +325,6 @@ container-window {
 }
 
 #yellow {
-    cursor: default;
     font-size: 6px;
     display: flex;
     justify-content: center;
@@ -342,7 +337,6 @@ container-window {
 }
 
 #green {
-    cursor: default;
     font-size: 7px;
     display: flex;
     justify-content: center;
@@ -357,7 +351,6 @@ container-window {
     z-index: 0;
     white-space: nowrap;
     overflow: hidden;
-    cursor: default;
     user-select: none;
     -webkit-user-select: none;
     border-radius: 10px 10px 0 0;
@@ -650,8 +643,63 @@ class WindowIframe extends HTMLElement {
     }
 }
 
+class IframeDiv extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        this.result = undefined;
+    }
+
+    static get observedAttributes() {
+        return ['src'];  // 观察 src 属性
+    }
+
+    // 属性变化时调用的回调函数
+    async attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'src' && newValue) {
+            try {
+                if (newValue instanceof Blob || newValue instanceof File) {
+                    this.src = newValue;
+                } else {
+                    // 如果是 URL 或路径，尝试获取文件并转换为 Blob
+                    const response = await fetch(newValue);
+                    if (response.ok) {
+                        this.src = await response.blob();
+                    } else {
+                        throw new Error('Failed to fetch the file');
+                    }
+                }
+                this.read();
+            } catch (error) {
+                console.error('Error loading src:', error);
+            }
+        }
+    }
+
+    read() {
+        if (!this.src) return;
+
+        const reader = new FileReader();
+
+        reader.onload = () => {
+            this.result = reader.result;
+            this.render();
+        }
+
+        reader.readAsText(this.src);
+    }
+
+    render() {
+        if (this.result) {
+            this.shadowRoot.innerHTML = `<pre>${this.result}</pre>`;
+        } else {
+            this.shadowRoot.innerHTML = `<p>文件未加载</p>`;
+        }
+    }
+}
+
 // Custom Elements Definition
-customElements.define('window-iframe', WindowIframe);
+customElements.define('iframe-div', IframeDiv);
 customElements.define('widget-switch', WidgetSwitch);
 customElements.define('widget-menu', WidgetMenu);
 customElements.define('container-messagebox', ContainerMessageBox);
