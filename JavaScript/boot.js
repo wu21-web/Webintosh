@@ -23,6 +23,7 @@ let ctrlRPressed = false;
 let manager_down_sec = 2;
 let recovery_down_sec = 4;
 let interval = null;
+let nowait = getQueryParam('nowait');
 
 window.addEventListener('keydown', function (event) {
     if (event.key === "Alt" && !altPressed) {
@@ -33,7 +34,7 @@ window.addEventListener('keydown', function (event) {
         ctrlRPressed = true;
     }
 
-    if (!interval && (altPressed || ctrlRPressed)) {
+    if (!interval && (altPressed || ctrlRPressed) && nowait != "true") {
         let elapsedSeconds = 0;
         const targetTime = ctrlRPressed ? recovery_down_sec : manager_down_sec;
         interval = setInterval(() => {
@@ -143,12 +144,17 @@ async function boot() {
 
 
     if (!freeze) {
-        setTimeout(() => {
-            logo.style.visibility = "visible";
+        if (nowait != "true") {
             setTimeout(() => {
-                toLogon(anyFileExists, fileExistsNum);
-            }, 1000);
-        }, 1500);
+                logo.style.visibility = "visible";
+                setTimeout(() => {
+                    toLogon(anyFileExists, fileExistsNum);
+                }, 1000);
+            }, 1500);
+        } else {
+            logo.style.visibility = "visible";
+            toLogon(anyFileExists, fileExistsNum);
+        }
     }
 }
 

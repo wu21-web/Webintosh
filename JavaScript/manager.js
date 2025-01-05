@@ -5,7 +5,7 @@ const option = getDiv("option");
 function toBoot() {
     option.style.display = "none";
     setTimeout(() => {
-        window.location = "./";
+        window.location = "./?nowait=true";
     }, 750);
 }
 
