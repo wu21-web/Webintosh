@@ -7,8 +7,6 @@ setTimeout(function () {
 
 const timeSvg = getText('timeText');
 const dateSvg = getText('dateText');
-const timep = getP('time');
-const datep = getP('date');
 const password = getInput('password');
 const svgFrame = getDiv('svgFrame');
 const tip = getP('tip');
@@ -30,12 +28,25 @@ const fps = 30;
 const frameDuration = 1000 / fps;
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
+// Svg Positioning
+function svg() {
+    let timeSvgRect = timeSvg.getBoundingClientRect();
+    let dateSvgRect = dateSvg.getBoundingClientRect();
+
+    let timePos = (document.body.clientWidth - timeSvgRect.width) / 2;
+    let datePos = (document.body.clientWidth - dateSvgRect.width) / 2;
+
+    timeSvg.setAttribute('x', timePos);
+    dateSvg.setAttribute('x', datePos);
+}
+
 function updateTime() {
     const currentTime = new Date();
     const hours = currentTime.getHours().toString().padStart(2, '0');
     const minutes = currentTime.getMinutes().toString().padStart(2, '0');
 
     timeSvg.innerHTML = hours + ":" + minutes;
+    svg();
 }
 
 function updateDate() {
@@ -50,6 +61,7 @@ function updateDate() {
     month = month.toString();
 
     dateSvg.innerHTML = month + "月" + day + "日" + " " + weekDay;
+    svg();
 }
 
 function updateOpacity() {
@@ -130,6 +142,9 @@ password.addEventListener('keypress', function (e) {
         }
     }
 });
+
+svg();
+window.addEventListener('resize', svg);
 
 updateTime();
 setInterval(updateTime, 1200);

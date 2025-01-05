@@ -11,6 +11,14 @@
     -webkit-user-select: none;
 }
 
+html {
+    min-height: 100vh;
+    background: var(--boot-bg);
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     min-height: 100vh;
     background: var(--boot-bg);
@@ -30,6 +38,7 @@ p[logo] {
     padding: 0;
     opacity: 0.92;
     margin-top: 25vh;
+    visibility: hidden;
 }
 
 img[logo] {
@@ -48,6 +57,7 @@ div[frame] {
     border-radius: 10px;
     overflow: hidden;
     border: solid 0.4px #0005;
+    visibility: hidden;
 }
 
 div[processframe] {

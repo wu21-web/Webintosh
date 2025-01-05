@@ -20,33 +20,52 @@ const fileList = [
 ];
 let altPressed = false;
 let ctrlRPressed = false;
+let manager_down_sec = 2;
+let recovery_down_sec = 4;
+let interval = null;
 
 window.addEventListener('keydown', function (event) {
-    if (event.altKey) {
-        event.preventDefault();
+    if (event.key === "Alt" && !altPressed) {
         altPressed = true;
     }
-    if (event.ctrlKey && event.key.toLowerCase() === 'r') {
-        event.preventDefault();
+    
+    if (event.ctrlKey && event.key.toLowerCase() === "r" && !ctrlRPressed) {
         ctrlRPressed = true;
     }
-    if (altPressed) {
-        setTimeout(function () {toManager()}, 250);
-    } else if (ctrlRPressed) {
-        setTimeout(function () {toRecovery()}, 250);
+
+    if (!interval && (altPressed || ctrlRPressed)) {
+        let elapsedSeconds = 0;
+        const targetTime = ctrlRPressed ? recovery_down_sec : manager_down_sec;
+        interval = setInterval(() => {
+            elapsedSeconds++;
+
+            if (elapsedSeconds >= targetTime) {
+                clearInterval(interval);
+                interval = null;
+
+                if (ctrlRPressed) {
+                    toRecovery();
+                } else if (altPressed) {
+                    toManager();
+                }
+            }
+        }, 1000);
     }
 });
 
 window.addEventListener('keyup', function (event) {
-    if (event.altKey) {
-        event.preventDefault();
+    if (event.key === "Alt") {
         altPressed = false;
     }
-    if (event.ctrlKey && event.key.toLowerCase() === 'r') {
+
+    if (event.key.toLowerCase() === "r" && event.ctrlKey) {
         ctrlRPressed = false;
-        event.preventDefault();
     }
-    console.log(altPressed, ctrlRPressed);
+
+    if (!altPressed && !ctrlRPressed && interval) {
+        clearInterval(interval);
+        interval = null;
+    }
 });
 
 function fetchJSON(url, arrayName, element) {
@@ -124,12 +143,18 @@ async function boot() {
 
 
     if (!freeze) {
-        toLogon(anyFileExists, fileExistsNum);
+        setTimeout(() => {
+            logo.style.visibility = "visible";
+            setTimeout(() => {
+                toLogon(anyFileExists, fileExistsNum);
+            }, 1000);
+        }, 1500);
     }
 }
 
 function toLogon(anyFileExists, fileExistsNum) {
     if (anyFileExists && fileExistsNum > 0) {
+        frame.style.visibility = 'visible';
         process.style.width = (process.clientWidth + 10 * fileExistsNum) + "%";
         if (process.style.width == "100%") {
             setTimeout(function () {

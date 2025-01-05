@@ -48,9 +48,12 @@ p[time] {
     bottom: 0px;
     right: 0px;
     clip-path: url(#timePath);
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    filter: brightness(150%);
+    -webkit-filter: brightness(150%);
+    font-family: 'SFPro-Bold', 'PingFang-Bold';
 }
 
 p[date] {
@@ -60,9 +63,12 @@ p[date] {
     bottom: 0px;
     right: 0px;
     clip-path: url(#datePath);
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    filter: brightness(150%);
+    -webkit-filter: brightness(150%);
+    font-family: 'SFPro-Bold', 'PingFang-Bold';
 }
 
 div[login] {
