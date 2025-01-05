@@ -21,7 +21,7 @@ const fileList = [
 let altPressed = false;
 let ctrlRPressed = false;
 let manager_down_sec = 2;
-let recovery_down_sec = 4;
+let recovery_down_sec = 3;
 let interval = null;
 let nowait = getQueryParam('nowait');
 
