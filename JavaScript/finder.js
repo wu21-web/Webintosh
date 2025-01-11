@@ -6,6 +6,8 @@ export const app_menus = {};
 export let menus = [];
 let applemenu;
 let appleMenu_state = false;
+let recoverymenu;
+let recoveryMenu_state = false;
 
 export function appleMenu(menu_logo) {
     if (!appleMenu_state) {
@@ -41,6 +43,52 @@ export function appleMenu(menu_logo) {
         applemenu.style.opacity = 0;
         setTimeout(function () {
             document.body.removeChild(applemenu);
+        }, 100);
+    }
+}
+
+function restart() {
+    
+}
+
+function shutdown() {
+    window.close();
+}
+
+export function recoveryMenu(menu_logo) {
+    if (!recoveryMenu_state) {
+        menu_logo.style.background = '#fafafa25';
+        menu_logo.style.textShadow = 'none';
+        recoveryMenu_state = true;
+        recoverymenu = new WidgetMenu(menu_logo, recoveryMenu_state);
+        recoverymenu.setAttribute('recoverymenu', '');
+        recoverymenu.setAttribute("x", "10");
+        recoverymenu.setAttribute("y", "25");
+        // recoverymenu.setAttribute("width", "200");
+        recoverymenu.setAttribute("content", "重新启动 关机 hr 启动磁盘...");
+        recoverymenu.setAttribute("command", "none none none");
+        document.body.appendChild(recoverymenu);
+        const closeMenu = (e) => {
+            if (!e.target.matches("widget-menu[recoverymenu]") && !e.target.isSameNode(menu_logo)) {
+                menu_logo.style.background = 'none';
+                menu_logo.style.textShadow = '0 2px 10px #000a;';
+                recoveryMenu_state = false;
+                recoverymenu.style.opacity = 0;
+                setTimeout(function () {
+                    document.body.removeChild(recoverymenu);
+                }, 100);
+                document.removeEventListener('click', closeMenu);
+            }
+        };
+
+        document.addEventListener('click', closeMenu);
+    } else {
+        menu_logo.style.background = '#fafafa00';
+        menu_logo.style.textShadow = '0 2px 10px #000a;';
+        recoveryMenu_state = false;
+        recoverymenu.style.opacity = 0;
+        setTimeout(function () {
+            document.body.removeChild(recoverymenu);
         }, 100);
     }
 }

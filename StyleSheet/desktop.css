@@ -4,7 +4,7 @@
     cursor: default;
     user-select: none;
     -webkit-user-select: none;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.6px;
 }
 
 body {
@@ -15,6 +15,13 @@ body {
     margin: 0;
 }
 
+body[gradient] {
+    background: radial-gradient(circle, #111311 0%, #0c0f0c 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 div[finderbar] {
     width: 100%;
     position: absolute;
@@ -23,12 +30,16 @@ div[finderbar] {
     backdrop-filter: blur(70px);
     -webkit-backdrop-filter: blur(70px);
     height: 24px;
-    z-index: 1024;
+    z-index: 2;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding: 0 10px;
+}
+
+div[finderbar][noblur] {
+    background: #3c3f3c;
 }
 
 div[finderbar] p {
@@ -93,8 +104,7 @@ iframe[wallpaper] {
 
 iframe[dock] {
     width: 100%;
-    max-height: 105px;
-    min-height: 102.5px;
+    height: 110px;
     position: absolute;
     bottom: 0;
     left: 0;

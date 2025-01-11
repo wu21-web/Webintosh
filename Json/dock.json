@@ -6,7 +6,8 @@
         ],
         [
             "启动台",
-            "Apps/Launchpad.html"
+            "Apps/Launchpad.html",
+            0, 0
         ],
         [
             "Safari浏览器",

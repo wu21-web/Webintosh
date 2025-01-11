@@ -584,65 +584,6 @@ container-messagebox {
     }
 }
 
-// Window: Iframe
-class WindowIframe extends HTMLElement {
-    constructor() {
-        super();
-
-        // 创建 Shadow DOM
-        this.attachShadow({ mode: 'open' });
-
-        // 创建 iframe 元素并添加到 Shadow DOM
-        this.iframe = document.createElement('iframe');
-        this.iframe.setAttribute('frameborder', '0');
-        this.shadowRoot.appendChild(this.iframe);
-
-        // 绑定 resizeIframe 方法
-        this.resizeIframe = this.resizeIframe.bind(this);
-    }
-
-    // 观察 src 属性变化
-    static get observedAttributes() {
-        return ['src'];
-    }
-
-    // 属性变化时更新 iframe 的 src
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (name === 'src' && oldValue !== newValue) {
-            this.iframe.src = newValue;
-        }
-    }
-
-    // 当 iframe 加载完成时调整高度
-    connectedCallback() {
-        this.iframe.onload = () => {
-            this.resizeIframe();
-        };
-
-        // 设置 src 初始值
-        if (this.hasAttribute('src')) {
-            this.iframe.src = this.getAttribute('src');
-        }
-
-        // 监听窗口大小变化，重新调整 iframe 高度
-        window.addEventListener('resize', this.resizeIframe);
-    }
-
-    // 断开时清理事件监听
-    disconnectedCallback() {
-        window.removeEventListener('resize', this.resizeIframe);
-    }
-
-    // 调整 iframe 的高度
-    resizeIframe() {
-        try {
-            this.iframe.height = this.iframe.contentWindow.document.body.scrollHeight + 'px';
-        } catch (e) {
-            console.error('无法调整 iframe 高度:', e);
-        }
-    }
-}
-
 class IframeDiv extends HTMLElement {
     constructor() {
         super();

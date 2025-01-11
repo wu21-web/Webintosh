@@ -21,7 +21,6 @@ const fileList = [
 let altPressed = false;
 let ctrlRPressed = false;
 let manager_down_sec = 2;
-let recovery_down_sec = 3;
 let interval = null;
 let nowait = getQueryParam('nowait');
 
@@ -36,17 +35,15 @@ window.addEventListener('keydown', function (event) {
 
     if (!interval && (altPressed || ctrlRPressed) && nowait != "true") {
         let elapsedSeconds = 0;
-        const targetTime = ctrlRPressed ? recovery_down_sec : manager_down_sec;
+        const targetTime = manager_down_sec;
         interval = setInterval(() => {
             elapsedSeconds++;
 
             if (elapsedSeconds >= targetTime) {
                 clearInterval(interval);
                 interval = null;
-
-                if (ctrlRPressed) {
-                    toRecovery();
-                } else if (altPressed) {
+                
+                if (altPressed) {
                     toManager();
                 }
             }
@@ -111,9 +108,19 @@ function getQueryParam(param) {
 
 async function boot() {
     let platform = getQueryParam('platform');
+    let boot = getQueryParam('boot');
+
     let freeze = false;
     if (!platform) {
         platform = 'MacPro7,1';
+    }
+
+    if (boot == "manager") {
+        toManager();
+    } else if (boot == "recovery") {
+        toRecovery();
+    } else if (boot == "problem") {
+        fiveCountry();
     }
 
     fetchJSON('../Json/boot.json', 'platform', platform)
@@ -151,6 +158,9 @@ async function boot() {
                 }
                 logo.style.visibility = "visible";
                 setTimeout(() => {
+                    if (ctrlRPressed) {
+                        setTimeout(toRecovery, 1700);
+                    }
                     toLogon(anyFileExists, fileExistsNum);
                 }, 1000);
             }, 1500);
@@ -179,6 +189,10 @@ function toManager() {
 
 function toRecovery() {
     window.location = "../Recovery";
+}
+
+function fiveCountry() {
+
 }
 
 window.onload = boot;

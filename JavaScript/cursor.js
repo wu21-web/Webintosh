@@ -10,10 +10,24 @@ cursor.style.transformOrigin = "left top";
 cursor.style.transform = "scale(0.1)";
 cursor.style.pointerEvents = "none";
 cursor.style.zIndex = 2048;
+cursor.id = "cursor";
 
-let lastX;
-let lastY;
-let lastTime;
+document.body.appendChild(cursor);
+
+const iframes = document.querySelectorAll("iframe");
+const url = window.location.href;
+let is_app = false;
+
+if (url.includes("Apps/")) {
+    cursor.style.opacity = "0";
+    is_app = true;
+} else {
+    cursor.style.opacity = "1";
+}
+
+let lastX = 0;
+let lastY = 0;
+let lastTime = 0;
 let idleTimer;
 
 window.addEventListener("mousemove", (e) => {
@@ -24,10 +38,12 @@ window.addEventListener("mousemove", (e) => {
     if (lastTime > 0) {
         const distance = Math.sqrt((currentX - lastX) ** 2 + (currentY - lastY) ** 2);
         const timeDiff = currentTime - lastTime;
-        speed = distance / timeDiff;
+        const speed = distance / timeDiff;
 
         if (speed > 10) {
-            cursor.style.transform = "scale(0.5)";
+            cursor.style.transform = "scale(0.75)";
+        } else {
+            cursor.style.transform = "scale(0.1)";
         }
     }
 
@@ -35,13 +51,95 @@ window.addEventListener("mousemove", (e) => {
     lastY = currentY;
     lastTime = currentTime;
 
-    cursor.style.top = e.clientY + "px";
-    cursor.style.left = e.clientX + "px";
+    cursor.style.top = `${currentY}px`;
+    cursor.style.left = `${currentX}px`;
 
     clearTimeout(idleTimer);
     idleTimer = setTimeout(() => {
         cursor.style.transform = "scale(0.1)";
-    }, 200);
+    }, 1000);
+
+    cursor.style.opacity = "1";
 });
 
-document.body.appendChild(cursor);
+if (!is_app) {
+    document.body.addEventListener("mouseenter", () => {
+        cursor.style.opacity = "1";
+        console.log("Enter Body");
+
+        iframes.forEach(iframe => {
+            const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
+
+            if (iframeDocument) {
+                let this_cursor = iframeDocument.querySelector("img[cursor]");
+                if (this_cursor) {
+                    this_cursor.style.opacity = "0";
+                }
+            }
+        });
+    });
+
+    document.body.addEventListener("mouseleave", () => {
+        cursor.style.opacity = "0";
+        console.log("Leave Body");
+    });
+
+    iframes.forEach((iframe) => {
+        const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
+
+        iframe.addEventListener("mouseenter", () => {
+            cursor.style.opacity = "0";
+            if (iframeDocument) {
+                iframe.contentWindow.document.getElementById("cursor").style.opacity = "1";
+            }
+            console.log("Enter Iframe");
+        });
+
+        iframe.addEventListener("mouseleave", () => {
+            cursor.style.opacity = "0";
+            if (iframeDocument) {
+                iframe.contentWindow.document.getElementById("cursor").style.opacity = "0";
+            }
+            console.log("Leave Iframe");
+        });
+
+        if (iframeDocument) {
+            iframe.contentWindow?.document.body.addEventListener("mouseenter", () => {
+                cursor.style.opacity = "0";
+                if (iframeDocument) {
+                    iframe.contentWindow.document.getElementById("cursor").style.opacity = "0";
+                }
+                console.log("Enter Body (Iframe)");
+            });
+
+            iframe.contentWindow?.document.body.addEventListener("mouseleave", () => {
+                cursor.style.opacity = "0";
+                if (iframeDocument) {
+                    iframe.contentWindow.document.getElementById("cursor").style.opacity = "0";
+                }
+                console.log("Leave Body (Iframe)");
+            });
+
+            // 新增逻辑：从一个iframe进入另一个iframe
+            iframe.contentWindow?.document.body.addEventListener("mouseenter", () => {
+                // 目标iframe进入时显示相应游标
+                cursor.style.opacity = "0"; 
+                if (iframeDocument) {
+                    iframe.contentWindow.document.getElementById("cursor").style.opacity = "1";
+                }
+                console.log("Enter Iframe Body");
+            });
+
+            iframe.contentWindow?.document.body.addEventListener("mouseleave", () => {
+                // 离开iframe时隐藏游标
+                cursor.style.opacity = "0"; 
+                if (iframeDocument) {
+                    iframe.contentWindow.document.getElementById("cursor").style.opacity = "0";
+                }
+                console.log("Leave Iframe Body");
+            });
+        }
+    });
+} else {
+    cursor.style.opacity = "0";
+}

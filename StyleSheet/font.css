@@ -17,3 +17,8 @@
     src: url(../Font/PingFangSC-Semibold.woff2);
     font-family: 'PingFang-Bold';
 }
+
+@font-face {
+    src: url(../Font/PingFangSC-Light.woff2);
+    font-family: 'PingFang-Light';
+}
