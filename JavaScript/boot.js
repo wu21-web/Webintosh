@@ -153,6 +153,7 @@ async function boot() {
     if (!freeze) {
         if (nowait != "true") {
             setTimeout(() => {
+                startupAudio();
                 if (altPressed) { // Don't execute continue if already pressed alt.
                     return;
                 }
@@ -165,6 +166,7 @@ async function boot() {
                 }, 1000);
             }, 1500);
         } else {
+            startupAudio();
             logo.style.visibility = "visible";
             toLogon(anyFileExists, fileExistsNum);
         }
@@ -181,6 +183,11 @@ function toLogon(anyFileExists, fileExistsNum) {
             }, 1750);
         }
     }
+}
+
+function startupAudio() {
+    const audio = new Audio('../Audios/Startup.mp3');
+    audio.play();
 }
 
 function toManager() {
