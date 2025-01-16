@@ -109,6 +109,14 @@ function getQueryParam(param) {
 async function boot() {
     let platform = getQueryParam('platform');
     let boot = getQueryParam('boot');
+    let theme = getQueryParam('theme');
+    if (theme == "gray") {
+        document.body.style.background = "var(--grayboot-bg)";
+        logo.style.color = "var(--grayboot-color)";
+        proFrame.style.background = "var(--grayboot-process-bg)";
+        process.style.background = "var(--grayboot-color)";
+        state.style.color = "var(--grayboot-color)";
+    }
 
     let freeze = false;
     if (!platform) {

@@ -16,10 +16,12 @@
         <p title>Welcome to Webintosh</p>
         <p subtitle>This page is under construction!</p>
         <p description>
-            This set of webpages provide you a realistic experience of <a link href="https://apple.com/macos">macOS Sequoia</a> in your web browser.<br />
+            This set of webpages provide you a realistic experience of <a link href="https://apple.com/macos">macOS
+                Sequoia</a> in your web browser.<br />
             All you have to do is to remember the log in password is one of the following: Ventura, Sonoma or
             Sequoia.<br />
-            Then hit the button below and enjoy your smooth Mac experience right in your browser! If you want to have a startup audio, please click or do something when you hited the button.
+            Then hit the button below and enjoy your smooth Mac experience right in your browser! If you want to have a
+            startup audio, please click or do something when you hited the button.
         </p>
         <widget-button style="transform: scale(1.2)" command="getStarted()">Get Started</widget-button>
         <p license>Made with html by CodeCrafter-TL ❤</p>
@@ -27,7 +29,11 @@
     <script>
         function getStarted() {
             setTimeout(function () {
-                window.location = 'Boot/index.html';
+                if (Math.random() <= 0.5) {
+                    window.location = 'Boot/?theme=gray';
+                } else {
+                    window.location = 'Boot/';
+                }
             }, 50);
         }
     </script>
