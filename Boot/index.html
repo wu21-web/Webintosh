@@ -1,11 +1,10 @@
 <!--
-Boot page in Webintosh
+Booting page in Webintosh
 
 Url:
-/Boot?type=problem
-/Boot?type=manager
-/Boot?type=recovery
-/Boot
+/boot?theme=gray
+/boot?theme=black
+/boot
 -->
 
 <!DOCTYPE html>
@@ -15,14 +14,14 @@ Url:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>macOS Sequoia</title>
-    <link rel="stylesheet" href="../StyleSheet/boot.css" />
-    <link rel="stylesheet" href="../StyleSheet/font.css" />
-    <!-- <link rel="stylesheet" href="../StyleSheet/cursor.css" /> -->
+    <link rel="stylesheet" href="../assets/styles/boot.css" />
+    <link rel="stylesheet" href="../assets/styles/font.css" />
+    <!-- <link rel="stylesheet" href="../assets/styles/cursor.css" /> -->
 </head>
 
 <body>
     <p logo></p>
-    <img logo src="../Image/Unsupported.png" />
+    <img logo src="../assets/images/icon.unsupported.png" />
     <div frame>
         <div processframe>
             <div process></div>
@@ -30,8 +29,8 @@ Url:
         <p state>support.apple.com/mac/startup</p>
     </div>
 
-    <script type="module" src="../JavaScript/boot.js"></script>
-    <script type="module" src="../JavaScript/element.js"></script>
+    <script type="module" src="../src/js/boot.js"></script>
+    <script type="module" src="../src/js/element.js"></script>
 </body>
 
 </html>

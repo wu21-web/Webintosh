@@ -49,7 +49,7 @@ div[launchpad] {
 }
 
 div[bg] {
-    background-image: url(../Image/Wallpaper.png);
+    background-image: url(../assets/images/Wallpaper.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

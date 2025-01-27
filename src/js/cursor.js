@@ -1,5 +1,5 @@
 const cursor = document.createElement("img");
-cursor.src = "../Image/Cursor.svg";
+cursor.src = "../assets/images/Cursor.svg";
 cursor.style.width = "256px";
 cursor.style.height = "256px";
 cursor.style.transition = "transform 0.2s ease";
@@ -63,27 +63,6 @@ window.addEventListener("mousemove", (e) => {
 });
 
 if (!is_app) {
-    document.body.addEventListener("mouseenter", () => {
-        cursor.style.opacity = "1";
-        console.log("Enter Body");
-
-        iframes.forEach(iframe => {
-            const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
-
-            if (iframeDocument) {
-                let this_cursor = iframeDocument.querySelector("img[cursor]");
-                if (this_cursor) {
-                    this_cursor.style.opacity = "0";
-                }
-            }
-        });
-    });
-
-    document.body.addEventListener("mouseleave", () => {
-        cursor.style.opacity = "0";
-        console.log("Leave Body");
-    });
-
     iframes.forEach((iframe) => {
         const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
 
@@ -120,9 +99,7 @@ if (!is_app) {
                 console.log("Leave Body (Iframe)");
             });
 
-            // 新增逻辑：从一个iframe进入另一个iframe
             iframe.contentWindow?.document.body.addEventListener("mouseenter", () => {
-                // 目标iframe进入时显示相应游标
                 cursor.style.opacity = "0"; 
                 if (iframeDocument) {
                     iframe.contentWindow.document.getElementById("cursor").style.opacity = "1";
@@ -131,7 +108,6 @@ if (!is_app) {
             });
 
             iframe.contentWindow?.document.body.addEventListener("mouseleave", () => {
-                // 离开iframe时隐藏游标
                 cursor.style.opacity = "0"; 
                 if (iframeDocument) {
                     iframe.contentWindow.document.getElementById("cursor").style.opacity = "0";

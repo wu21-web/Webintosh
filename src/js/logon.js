@@ -20,7 +20,7 @@ const fileListHere = [
     "../Apps/Wallpaper.html",
     "../Desktop/index.html",
     "../Apps/Dock.html",
-    "../Image/MacPro.png"
+    "../assets/images/MacPro.png"
 ];
 const rects = document.querySelectorAll('rect');
 let opacityValues = [0.8, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7];
@@ -39,6 +39,8 @@ function svg() {
     timeSvg.setAttribute('x', timePos);
     dateSvg.setAttribute('x', datePos);
 }
+
+svg();
 
 function updateTime() {
     const currentTime = new Date();
@@ -143,7 +145,6 @@ password.addEventListener('keypress', function (e) {
     }
 });
 
-svg();
 window.addEventListener('resize', svg);
 
 updateTime();

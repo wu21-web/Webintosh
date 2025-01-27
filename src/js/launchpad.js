@@ -11,7 +11,7 @@ if (getQueryParam('status') == "close") {
     document.querySelector('div[launchpad]').style.animation = "scale 0.75s ease forwards";
 }
 
-fetch('../Json/launchpad.json')
+fetch('../assets/jsons/launchpad.json')
     .then(response => {
         return response.json();
     })
@@ -22,7 +22,7 @@ fetch('../Json/launchpad.json')
             let container = document.createElement('div');
             container.setAttribute('container', '');
             let icon = document.createElement('img');
-            icon.src = "../Image/" + appitem + ".png";
+            icon.src = "../assets/images/" + appitem + ".png";
             let appname = document.createElement('p');
             appname.innerHTML = appitem;
             container.appendChild(icon);

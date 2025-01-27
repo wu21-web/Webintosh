@@ -43,10 +43,9 @@ p[logo] {
 
 img[logo] {
     display: none;
-    width: 128px;
-    height: 128px;
+    width: 192px;
+    height: 192px;
     margin-top: 25vh;
-    opacity: 0.9;
 }
 
 div[frame] {

@@ -13,8 +13,7 @@ body {
     overflow: hidden;
     margin: 0;
     padding: 0;
-    background: url(../Image/Wallpaper.png);
-    /* background: url(/big-sur-mountains-night-dark-macos-big-sur-stock-california-3840x2160-1493.jpg); */
+    background: url(../images/Wallpaper.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

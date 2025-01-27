@@ -1,4 +1,5 @@
 import { getDiv, getP, getImg } from './element.js';
+import { getQueryParam } from './url.js';
 
 const process = getDiv("process");
 const frame = getDiv("frame");
@@ -7,60 +8,41 @@ const state = getP("state");
 const logo = getP("logo");
 const logoImg = getImg("logo");
 const fileList = [
-    "../Font/PingFangSC-Regular.woff2",
-    "../Font/sf-pro-display_regular.woff2",
-    "../Font/PingFangSC-Semibold.woff2",
-    "../Font/sf-pro-display_semibold.woff2",
-    "../StyleSheet/boot.css",
-    "../Image/Unsupported.png",
-    "../Json/boot.json",
-    "../Image/MacPro.png",
-    "../Image/Wallpaper.png",
+    "../assets/fonts/PingFangSC-Regular.woff2",
+    "../assets/fonts/sf-pro-display_regular.woff2",
+    "../assets/fonts/PingFangSC-Semibold.woff2",
+    "../assets/fonts/sf-pro-display_semibold.woff2",
+    "../assets/styles/boot.css",
+    "../assets/images/Unsupported.png",
+    "../assets/jsons/boot.json",
+    "../assets/images/MacPro.png",
+    "../assets/images/Wallpaper.png",
     "../Logon/index.html"
 ];
-let altPressed = false;
 let ctrlRPressed = false;
-let manager_down_sec = 2;
 let interval = null;
 let nowait = getQueryParam('nowait');
+let theme = getQueryParam('theme');
 
 window.addEventListener('keydown', function (event) {
-    if (event.key === "Alt" && !altPressed) {
-        altPressed = true;
-    }
-    
     if (event.ctrlKey && event.key.toLowerCase() === "r" && !ctrlRPressed) {
         ctrlRPressed = true;
     }
 
-    if (!interval && (altPressed || ctrlRPressed) && nowait != "true") {
+    if (!interval && ctrlRPressed && nowait != "true") {
         let elapsedSeconds = 0;
-        const targetTime = manager_down_sec;
         interval = setInterval(() => {
             elapsedSeconds++;
-
-            if (elapsedSeconds >= targetTime) {
-                clearInterval(interval);
-                interval = null;
-                
-                if (altPressed) {
-                    toManager();
-                }
-            }
         }, 1000);
     }
 });
 
 window.addEventListener('keyup', function (event) {
-    if (event.key === "Alt") {
-        altPressed = false;
-    }
-
     if (event.key.toLowerCase() === "r" && event.ctrlKey) {
         ctrlRPressed = false;
     }
 
-    if (!altPressed && !ctrlRPressed && interval) {
+    if (!ctrlRPressed && interval) {
         clearInterval(interval);
         interval = null;
     }
@@ -101,15 +83,9 @@ async function fileExists(filename) {
     }
 }
 
-function getQueryParam(param) {
-    const params = new URLSearchParams(window.location.search);
-    return params.get(param);
-}
-
 async function boot() {
     let platform = getQueryParam('platform');
     let boot = getQueryParam('boot');
-    let theme = getQueryParam('theme');
     if (theme == "gray") {
         document.body.style.background = "var(--grayboot-bg)";
         logo.style.color = "var(--grayboot-color)";
@@ -131,7 +107,7 @@ async function boot() {
         fiveCountry();
     }
 
-    fetchJSON('../Json/boot.json', 'platform', platform)
+    fetchJSON('../../assets/jsons/boot.json', 'platform', platform)
         .then(result => {
             if (result) {
                 console.log("Loaded SMBIOS: " + platform);
@@ -162,17 +138,16 @@ async function boot() {
         if (nowait != "true") {
             setTimeout(() => {
                 startupAudio();
-                if (altPressed) { // Don't execute continue if already pressed alt.
-                    return;
-                }
-                logo.style.visibility = "visible";
                 setTimeout(() => {
-                    if (ctrlRPressed) {
-                        setTimeout(toRecovery, 1700);
-                    }
-                    toLogon(anyFileExists, fileExistsNum);
-                }, 1000);
-            }, 1500);
+                    logo.style.visibility = "visible";
+                    setTimeout(() => {
+                        if (ctrlRPressed) {
+                            setTimeout(toRecovery, 1750);
+                        }
+                        toLogon(anyFileExists, fileExistsNum);
+                    }, 1500);
+                }, 1500);
+            }, 250);
         } else {
             startupAudio();
             logo.style.visibility = "visible";
@@ -187,23 +162,23 @@ function toLogon(anyFileExists, fileExistsNum) {
         process.style.width = (process.clientWidth + 10 * fileExistsNum) + "%";
         if (process.style.width == "100%") {
             setTimeout(function () {
-                window.location = "../Logon";
+                window.location = "../logon";
             }, 1750);
         }
     }
 }
 
 function startupAudio() {
-    const audio = new Audio('../Audios/Startup.mp3');
+    const audio = new Audio('../../assets/sounds/Startup.mp3');
     audio.play();
 }
 
-function toManager() {
-    window.location = "./manager.html";
+function toManager(theme) {
+    window.location = `./manager.html?theme=${theme}`;
 }
 
 function toRecovery() {
-    window.location = "../Recovery";
+    window.location = "../recovery";
 }
 
 function fiveCountry() {
@@ -217,8 +192,10 @@ function notSupported() {
     frame.style.minWidth = "none";
     frame.style.width = "auto";
     frame.style.height = "auto";
+    frame.style.marginTop = "17.5vh";
     process.style.display = "none";
     logo.style.display = "none";
     logoImg.style.display = "block";
     state.style.display = "block";
+    state.style.visibility = "visible";
 }

@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Webintosh</title>
-    <link rel="stylesheet" href="StyleSheet/font.css" />
-    <link rel="stylesheet" href="StyleSheet/oobe.css" />
-    <link rel="stylesheet" href="StyleSheet/cursor.css" />
+    <link rel="stylesheet" href="assets/styles/font.css" />
+    <link rel="stylesheet" href="assets/styles/oobe.css" />
+    <!-- <link rel="stylesheet" href="assets/styles/cursor.css" /> -->
 </head>
 
 <body>
     <div main>
-        <img src="Image/Sequoia.png" />
+        <img src="assets/images/Sequoia.png" />
         <p title>Welcome to Webintosh</p>
         <p subtitle>This page is under construction!</p>
         <p description>
@@ -23,26 +23,29 @@
             Then hit the button below and enjoy your smooth Mac experience right in your browser! If you want to have a
             startup audio, please click or do something when you hited the button.
         </p>
-        <widget-button style="transform: scale(1.2)" command="getStarted()">Get Started</widget-button>
-        <p license>Made with html by CodeCrafter-TL ❤</p>
+        <hr />
+        <div bottom-content>
+            <widget-button style="transform: scale(1.2)" command="getStarted()">Get Started</widget-button>
+        </div>
+        <!-- <p license>Made with html by CodeCrafter-TL ❤</p> -->
     </div>
     <script>
         function getStarted() {
             setTimeout(function () {
                 if (Math.random() <= 0.5) {
-                    window.location = 'Boot/?theme=gray';
+                    window.location = 'firmware/?theme=gray';
                 } else {
-                    window.location = 'Boot/';
+                    window.location = 'firmware/?theme=black';
                 }
             }, 50);
         }
 
         window.onload = () => {
-            document.getElementById('cursor').src = "./Image/Cursor.svg";  
+            document.getElementById('cursor').src = "assets/images/Cursor.svg";  
         };
     </script>
-    <script type="module" src="JavaScript/ui.js"></script>
-    <script src="JavaScript/cursor.js"></script>
+    <script type="module" src="src/js/ui.js"></script>
+    <!-- <script src="src/js/cursor.js"></script> -->
 </body>
 
 </html>

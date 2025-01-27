@@ -54,7 +54,7 @@ function create_window(x, y, zindex=null, file, type=null) {
 const dock = getDiv('dock');
 const appname = getDiv("appname");
 
-fetch('../Json/dock.json')
+fetch('../assets/jsons/dock.json')
     .then(response => {
         return response.json();
     })
@@ -83,7 +83,7 @@ fetch('../Json/dock.json')
             if (i == 1) {
                 light.style.opacity = "0.4";
             }
-            icon.src = "../Image/" + dockitem.name + ".png";
+            icon.src = "../assets/images/" + dockitem.name + ".png";
             icon.alt = dockitem.name;
             icon.path = dockitem.path;
             icons.push([icon, dockitem.path]);

@@ -1,5 +1,10 @@
 body {
-    background: black;
+    --grayboot-bg: #bfbfbf;
+    --grayboot-color: #555;
+    --boot-bg: #000;
+    --boot-color: #fff;
+    background: var(--boot-bg);
+    color: var(--boot-color);
     height: 100vh;
     overflow: hidden;
     font-family: 'SFPro-Regular', 'PingFang-Regular';
@@ -8,26 +13,11 @@ body {
     justify-content: center;
 }
 
-@keyframes load {
-    0% {
-        transform: translateX(130px);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
 div[manager] {
     display: inline-flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    animation: load 0.5s ease-out forwards;
-    animation-delay: 0.25s;
-    transform: translateX(130px);
     opacity: 0;
 }
 
@@ -54,7 +44,6 @@ img[selector] {
 }
 
 p[text] {
-    color: white;
     font-size: 11px;
     margin: 0;
     margin-top: 3px;
