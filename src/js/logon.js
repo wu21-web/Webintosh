@@ -112,7 +112,7 @@ async function toDesktop() {
     }
 
     await sleep(timeout);
-    window.location = '../Desktop';
+    window.location = '../desktop';
 }
 
 async function invalidPassword(value = "Ventura Sonoma Sequoia 选一个吧") {
@@ -135,13 +135,11 @@ async function invalidPassword(value = "Ventura Sonoma Sequoia 选一个吧") {
 
 password.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-        if (passwords.includes(password.value) && password.value !== "CoedCrafter-TL") {
-            toDesktop();
-        } else if (password.value == "CodeCrafter-TL") {
-            invalidPassword("别拍马屁 好好看简介的密码或者再错一遍（");
-        } else {
+        if (!passwords.includes(password.value)) {
             invalidPassword();
+            return;
         }
+        toDesktop();
     }
 });
 
