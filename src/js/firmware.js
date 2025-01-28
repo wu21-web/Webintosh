@@ -49,7 +49,7 @@ window.addEventListener('keyup', function (event) {
 });
 
 function toManager() {
-    window.location = `../boot/manager.html?theme=${theme}`;
+    window.location = `./manager.html?theme=${theme}`;
 }
 function toBoot() {
     window.location = `../boot/?theme=${theme}&nowait=true`;

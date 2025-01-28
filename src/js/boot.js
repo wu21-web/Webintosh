@@ -99,9 +99,7 @@ async function boot() {
         platform = 'MacPro7,1';
     }
 
-    if (boot == "manager") {
-        toManager();
-    } else if (boot == "recovery") {
+    if (boot == "recovery") {
         toRecovery();
     } else if (boot == "problem") {
         fiveCountry();
@@ -171,10 +169,6 @@ function toLogon(anyFileExists, fileExistsNum) {
 function startupAudio() {
     const audio = new Audio('../../assets/sounds/Startup.mp3');
     audio.play();
-}
-
-function toManager(theme) {
-    window.location = `./manager.html?theme=${theme}`;
 }
 
 function toRecovery() {
