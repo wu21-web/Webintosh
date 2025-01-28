@@ -105,7 +105,7 @@ async function boot() {
         fiveCountry();
     }
 
-    fetchJSON('../assets/jsons/boot.json', 'platform', platform)
+    fetchJSON('../../assets/jsons/boot.json', 'platform', platform)
         .then(result => {
             if (result) {
                 console.log("Loaded SMBIOS: " + platform);
