@@ -186,7 +186,7 @@ function notSupported() {
     frame.style.minWidth = "none";
     frame.style.width = "auto";
     frame.style.height = "auto";
-    frame.style.marginTop = "17.5vh";
+    frame.style.marginTop = "20vh";
     process.style.display = "none";
     logo.style.display = "none";
     logoImg.style.display = "block";
