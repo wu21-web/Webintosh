@@ -17,7 +17,7 @@ const fileList = [
     "../assets/jsons/boot.json",
     "../assets/images/MacPro.png",
     "../assets/images/Wallpaper.png",
-    "../Logon/index.html"
+    "../logon/index.html"
 ];
 let ctrlRPressed = false;
 let interval = null;
@@ -105,7 +105,7 @@ async function boot() {
         fiveCountry();
     }
 
-    fetchJSON('../../assets/jsons/boot.json', 'platform', platform)
+    fetchJSON('../assets/jsons/boot.json', 'platform', platform)
         .then(result => {
             if (result) {
                 console.log("Loaded SMBIOS: " + platform);
@@ -167,7 +167,7 @@ function toLogon(anyFileExists, fileExistsNum) {
 }
 
 function startupAudio() {
-    const audio = new Audio('../../assets/sounds/Startup.mp3');
+    const audio = new Audio('../assets/sounds/Startup.mp3');
     audio.play();
 }
 
