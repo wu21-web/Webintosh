@@ -1,32 +1,8 @@
-import { getMenu, updateMenubar, app_menus, appleMenu, setupMenu, menus } from "./finder.js";
+import { appleMenu, registerAllMenu } from "./finder.js";
 import { getP } from "./element.js";
 
 const datetime = getP('datetime');
 const menu_logo = getP("logo");
-
-function fetchJSON(url, arrayName) {
-    return fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`网络响应失败，状态码: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            // 确保数据中包含指定的数组
-            if (data.hasOwnProperty(arrayName) && Array.isArray(data[arrayName])) {
-                return data[arrayName]; // 返回指定的数组
-            } else {
-                // 如果数据中没有指定的数组或数组格式不正确
-                throw new Error(`未找到指定的数组名称 "${arrayName}" 或该值不是数组类型`);
-            }
-        })
-        .catch(error => {
-            // 统一的错误处理，打印详细的错误信息
-            console.error('发生错误:', error.message);
-            throw error;  // 可选择将错误抛出，以便上层捕获
-        });
-}
 
 function updateTime() {
     const currentDateTime = new Date();
@@ -56,7 +32,6 @@ function getMaxZIndex() {
 }
 
 menu_logo.addEventListener('click', () => appleMenu(menu_logo));
-getMenu();
-// setupMenu(menus[0], "关于访达 hr 设置... hr 清倒废纸篓... hr 服务 hr 隐藏访达 隐藏其他 全部显示", "none none none none none none none", "45", "125")
+registerAllMenu();
 updateTime();
 setInterval(updateTime, 10000);

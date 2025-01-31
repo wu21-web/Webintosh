@@ -135,7 +135,6 @@ async function boot() {
     if (!freeze) {
         if (nowait != "true") {
             setTimeout(() => {
-                startupAudio();
                 setTimeout(() => {
                     logo.style.visibility = "visible";
                     setTimeout(() => {
@@ -147,7 +146,6 @@ async function boot() {
                 }, 1500);
             }, 250);
         } else {
-            startupAudio();
             logo.style.visibility = "visible";
             toLogon(anyFileExists, fileExistsNum);
         }
@@ -164,11 +162,6 @@ function toLogon(anyFileExists, fileExistsNum) {
             }, 1750);
         }
     }
-}
-
-function startupAudio() {
-    const audio = new Audio('../assets/sounds/Startup.mp3');
-    audio.play();
 }
 
 function toRecovery() {

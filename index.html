@@ -11,23 +11,24 @@
 </head>
 
 <body>
-    <div main>
-        <img src="assets/images/Sequoia.png" />
-        <p title>Welcome to Webintosh</p>
-        <p subtitle>This page is under construction!</p>
-        <p description>
-            This set of webpages provide you a realistic experience of <a link href="https://apple.com/macos">macOS
-                Sequoia</a> in your web browser.<br />
-            All you have to do is to remember the log in password is one of the following: Ventura, Sonoma or
-            Sequoia.<br />
-            Then hit the button below and enjoy your smooth Mac experience right in your browser! If you want to have a
-            startup audio, please click or do something when you hited the button.
-        </p>
-        <hr />
-        <div bottom-content>
-            <widget-button style="transform: scale(1.2)" command="getStarted()">Get Started</widget-button>
+    <div container>
+        <div main>
+            <img src="assets/images/Sequoia.png" />
+            <p title>欢迎访问 Webintosh</p>
+            <p subtitle>此页面仍在开发!</p>
+            <p description>
+                此网页会在您的浏览器中带来几乎真实的 <a link href="https://apple.com.cn/mac">Mac (intosh)</a> 体验。<br />
+                您必须记住登录密码可以使用下列的密码任选其一: Ventura，Sonoma，Sequoia。那么点击按钮来享受丝滑的 Mac 体验吧！<br />
+                如果您需要类似 Mac 的 Boot-chime，请在点击按钮后做一些与网页的交互来绕过自动播放限制。
+            </p>
+            <div bottom-content>
+                <hr />
+                <div inner-content>
+                    <widget-button style="transform: scale(1.2)" command="getStarted()">Get Started</widget-button>
+                </div>
+            </div>
+            <!-- <p license>Made with html by CodeCrafter-TL ❤</p> -->
         </div>
-        <!-- <p license>Made with html by CodeCrafter-TL ❤</p> -->
     </div>
     <script>
         function getStarted() {
@@ -41,7 +42,7 @@
         }
 
         window.onload = () => {
-            document.getElementById('cursor').src = "assets/images/Cursor.svg";  
+            document.getElementById('cursor').src = "assets/images/Cursor.svg";
         };
     </script>
     <script type="module" src="src/js/ui.js"></script>

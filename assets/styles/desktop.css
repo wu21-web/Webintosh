@@ -13,6 +13,11 @@ body {
     overflow: hidden;
     padding: 0;
     margin: 0;
+    background: url(../images/Wallpaper.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
 }
 
 body[gradient] {

@@ -1,9 +1,20 @@
 import { getP } from './element.js';
 import { WidgetMenu } from "./ui.js";
 
-export const app_menus = {};
+export const app_menus = {
+    "menu0": [
+        "关于访达 hr 设置... hr 清倒废纸篓... hr 服务 hr 隐藏访达 隐藏其他 全部显示",
+        "none none none none none none none"
+    ],
+    "menu1": [
+        "新建%20“访达”%20窗口",
+        "none"
+    ]
+};
 
 export let menus = [];
+export let menu_states = [];
+export let registed_menus = [];
 let applemenu;
 let appleMenu_state = false;
 let recoverymenu;
@@ -48,7 +59,7 @@ export function appleMenu(menu_logo) {
 }
 
 function restart() {
-    
+
 }
 
 function shutdown() {
@@ -105,39 +116,81 @@ export function getMenu() {
     }
 }
 
-let menuState = false;
-let currentMenu = null;
+function showAppMenu(element, menu, cmd) {
+    let index = registed_menus.indexOf(element);
+    let this_state = menu_states[index];
+    let this_menu = null;
 
-export function setupMenu(element, menu, cmd, x, width) {
-    if (!menuState) {
+    // 查找已存在的菜单
+    if (index !== -1) {
+        this_menu = document.querySelector(`widget-menu[appmenu${index}]`);
+    }
+
+    if (!this_state) {
+        // 打开菜单
         element.style.background = '#fafafa25';
         element.style.textShadow = 'none';
+        menu_states[index] = true;
 
-        currentMenu = new WidgetMenu(element, menuState);
-        currentMenu.setAttribute("x", x);
-        currentMenu.setAttribute("y", "25");
-        currentMenu.setAttribute("width", width);
-        currentMenu.setAttribute("content", menu);
-        currentMenu.setAttribute("command", cmd);
-        document.body.appendChild(currentMenu);
+        if (!this_menu) {
+            // 创建新菜单
+            this_menu = new WidgetMenu(element, true);
+            registed_menus.push(this_menu);
+            this_menu.setAttribute(`appmenu${index}`, '');
+            this_menu.setAttribute("x", `${element.offsetLeft}`);
+            this_menu.setAttribute("y", "25");
+            this_menu.setAttribute("width", "150");
+            this_menu.setAttribute("content", menu);
+            this_menu.setAttribute("command", cmd);
+            document.body.appendChild(this_menu);
+        } else {
+            // 显示已存在的菜单
+            this_menu.style.opacity = 1;
+        }
 
-        menuState = true;
-        document.addEventListener('click', handleClickOutsideMenu);
+        // 关闭菜单的函数
+        const closeMenu = (e) => {
+            if (!e.target.matches(`widget-menu[appmenu${index}]`) && !e.target.isSameNode(element)) {
+                element.style.background = 'none';
+                element.style.textShadow = '0 2px 10px #000a';
+                menu_states[index] = false;
+                if (this_menu) {
+                    this_menu.style.opacity = 0;
+                    setTimeout(() => {
+                        if (this_menu && document.body.contains(this_menu)) {
+                            document.body.removeChild(this_menu);
+                        }
+                    }, 100);
+                }
+                document.removeEventListener('click', closeMenu);
+            }
+        };
+
+        // 移除旧的监听器并绑定新的监听器
+        document.removeEventListener('click', closeMenu);
+        document.addEventListener('click', closeMenu);
     } else {
-        element.style.background = '#fafafa00';
-        element.style.textShadow = '0 2px 10px #000a;';
-        menuState = false;
-
-        currentMenu.style.opacity = 0;
-        setTimeout(function () {
-            document.body.removeChild(currentMenu);
-            currentMenu = null;
-        }, 300);
+        // 关闭菜单
+        element.style.background = 'none';
+        element.style.textShadow = '0 2px 10px #000a';
+        menu_states[index] = false;
+        if (this_menu) {
+            this_menu.style.opacity = 0;
+            setTimeout(() => {
+                if (this_menu && document.body.contains(this_menu)) {
+                    document.body.removeChild(this_menu);
+                }
+            }, 100);
+        }
     }
 }
 
-export function handleClickOutsideMenu(e) {
-    if (!e.target.closest('widget-menu')) {
-        setupMenu(currentMenu, currentMenu.getAttribute("content"), currentMenu.getAttribute("command"), currentMenu.getAttribute("x"), currentMenu.getAttribute("y"));
+export function registerAllMenu() {
+    getMenu();
+    for (let i = 1; i < menus.length; i++) {
+        console.log("Registered " + menus[i]);
+        menus[i].addEventListener("click", () => {
+            showAppMenu(menus[i], app_menus[i][0], app_menus[i][1]);
+        });
     }
 }
